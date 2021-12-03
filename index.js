@@ -104,20 +104,20 @@ function hoursWorkedOnDate(time){
 }
 
 function wagesEarnedOnDate(time){
-    let payOwed = hoursWorkedOnDate(time) * this.payPerHour;
+    let payOwed = hoursWorkedOnDate.call(this, time) * this.payPerHour; //Can change .call to .apply
     return payOwed;
 }
 
 function findEmployeeByFirstName(srcArray, firstName){
     // let  = srcArray.map(employee)
     //return employee Object with same firstName
-    //.find((emp) => {
-        //return emp.firstName === ;
-    // });
+    return srcArray.find((emp) => {
+        return emp.firstName === firstName;
+    });
 }
 
 function calculatePayroll(array){
-    let employeeWages = array.map(employee => allWagesFor(employee));
+    let employeeWages = array.map(employee => allWagesFor.call(employee));
     let payroll = employeeWages.reduce((previous, current) => { //Calculate total wages owed.
         return previous + current;
     }, 0);
